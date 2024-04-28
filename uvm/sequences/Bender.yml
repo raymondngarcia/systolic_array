@@ -1,0 +1,15 @@
+package:
+  name: sa_uvm_seq
+  description: "UVM Sequences for SA Testbench"
+  authors:
+    - "raymond.garcia"
+
+dependencies:
+  sa_uvm_env:            { path: "../env" }
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - sa_seq_pkg.sv

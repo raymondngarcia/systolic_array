@@ -1,0 +1,15 @@
+package:
+  name: sa_uvm_env
+  description: "UVM Environment for SA"
+  authors:
+    - "raymond.garcia"
+
+dependencies:
+  sa_uvm_agent:                { path: "../agents/sa_agent" }
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - sa_env_pkg.sv

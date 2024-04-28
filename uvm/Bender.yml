@@ -1,0 +1,22 @@
+package:
+  name: sa_uvm_tb
+  description: "SA DV UVM TB"
+  authors:
+    - "raymond.garcia"
+
+dependencies:
+  uvm        :    { path: "../uvm_pkg"}
+  #sa_rtl     :    { path: "../rtl"  }
+  sa_uvm_test:    { path: "./tests"  } # Tests, SA Verification Env
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+      - /$VCS_HOME/etc/uvm-1.2/src
+    files:
+      - /$VCS_HOME/etc/uvm-1.2/uvm_pkg.sv
+      #- ../rtl/sa_pkg.sv
+      #- ../rtl/sa_if.sv
+      #- ../rtl/sa.sv
+      - ../rtl/hdl_top.sv

@@ -1,0 +1,14 @@
+package:
+  name: sa_rtl
+  description: "SA RTL PKG"
+  authors:
+    - "raymond.garcia"
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - sa_pkg.sv
+      - sa_if.sv
+      - sa.sv

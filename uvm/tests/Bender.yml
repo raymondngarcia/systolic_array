@@ -1,0 +1,15 @@
+package:
+  name: sa_uvm_test
+  description: "Tests for SA UVM Testbench"
+  authors:
+    - "raymond.garcia"
+
+dependencies:
+  sa_uvm_seq:            { path: "../sequences" }
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - sa_test_pkg.sv

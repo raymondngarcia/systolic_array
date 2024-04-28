@@ -1,0 +1,15 @@
+package:
+  name: ai_core_ls_uvm_addr_sb
+  description: "UVM IFD ODR Address Scoreboard for AI CORE LS"
+  authors:
+    - "raymond.garcia@axelera.ai"
+
+dependencies:
+  uvm:                         { path: "../../../../common/uvm"}
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - ifd_odr_addr_gen_scoreboard_pkg.sv

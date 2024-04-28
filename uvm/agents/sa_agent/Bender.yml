@@ -1,0 +1,16 @@
+package:
+  name: sa_uvm_agent
+  description: "SA UVM Agent"
+  authors:
+    - "raymond.garcia"
+
+dependencies:
+  uvm        :    { path: "../../../uvm_pkg"}
+  sa_rtl     :    { path: "../../../rtl"  }
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - sa_agent_pkg.sv
