@@ -7,12 +7,15 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uv
   typedef sa_seq_item#(DIN_WIDTH, N)   seq_item_t;
   typedef bit signed [2*DIN_WIDTH-1:0] c_data_t;
   typedef bit signed [DIN_WIDTH-1:0]   ab_data_t;
-  typedef enum { A_DIN, B_DIN, C_DIN, C_DOUT } drv_port_t;
+  typedef bit signed [N-1:0][2*DIN_WIDTH-1:0] c_data_packed_t;
 
   c_data_t                     cin_q[N][$];
   ab_data_t                    a_q[N][$];
   ab_data_t                    b_q[N][$];
   c_data_t                     cout_q[N][$];
+
+  seq_item_t sa_q[$];
+  semaphore sa_q_sem;
 
   function new (string name, uvm_component parent);
     super.new (name, parent);
@@ -25,6 +28,7 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uv
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     sa_port  = new("ag_ap", this);
+    sa_q_sem = new(1);
   endfunction
 
   virtual task monitor_abc();
@@ -32,6 +36,7 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uv
     int unsigned diff;
     ab_data_t a, b;
     c_data_t c;
+    seq_item_t sa;
     forever begin
       @(vif.mon);
       for (int i=0; i < N; i++) begin
@@ -77,14 +82,42 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uv
           end
         end
         first_valid = 1;
+
+        // this means all data are received and we can compute for COUT
+        sa = create_matrix_item();
+        sa_q_sem.get();
+        sa_q.push_back(sa);
+        sa_q_sem.put();
+        sa_port.write(sa.do_clone());
       end
     end
   endtask
 
-   virtual task monitor_cout();
+  function seq_item_t create_matrix_item();
+    seq_item_t itm = seq_item_t::type_id::create("itm");
+
+    for (int i=0; i<N; i++) begin
+      if (a_q[i].size() < N) `uvm_error(get_name(), $sformatf("a_q[%0d].size() < N! Got size of %0d. Should be >= %0d", i, a_q[i].size(), N))
+      if (b_q[i].size() < N) `uvm_error(get_name(), $sformatf("b_q[%0d].size() < N! Got size of %0d. Should be >= %0d", i, b_q[i].size(), N))
+      // CIN size is not checked. this is optional
+    end
+
+    // create A,B,C_IN
+    for (int i=0; i<N; i++) begin
+      itm.a_din[i] = a_q[i].pop_front();
+      itm.b_din[i] = b_q[i].pop_front();
+      itm.c_din[i] = cin_q[i].pop_front();
+    end
+    itm.compute_cout();
+    return itm;
+  endfunction
+
+  virtual task monitor_cout();
     bit first_valid;
     int unsigned diff;
     c_data_t c;
+    c_data_packed_t c_packed;
+    seq_item_t itm;
     forever begin
       @(vif.mon);
       for (int i=0; i < N; i++) begin
@@ -101,9 +134,24 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uv
           for (int i=0; i < N; i++) begin
             repeat (diff-i) void'(cout_q[(N-i)-1].pop_front());
           end
-
         end
         first_valid = 1;
+
+        // Compare COUT
+        sa_q_sem.get();
+        if (sa_q.size() ==0) begin
+          `uvm_error(get_name(), "sa_q.size() == 0! Unexpected COUT output!")
+        end else begin
+          for (int i=0; i < N; i++) begin
+            // bit signed [N-1:0][2*DIN_WIDTH-1:0]  VS bit signed [2*DIN_WIDTH-1:0][N][$]
+            c_packed[i] = cout_q[i].pop_front();
+          end
+          itm  = sa_q.pop_front();
+          if (itm.has_cout_mismatch(c_packed)) begin
+            `uvm_error(get_name(), $sformatf("Mismatch on COUT! %s", itm.convert2string()))
+          end
+        end
+        sa_q_sem.put();
       end
     end
   endtask

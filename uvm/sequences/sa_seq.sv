@@ -30,13 +30,14 @@ class sa_seq extends uvm_sequence;
 
     for (int i=0; i < m_iteration; i++) begin
       sa_item = sa_item_t::type_id::create("sa_item");
-      if (!sa_item.randomize()) begin
+      if (!sa_item.randomize() with {
+        debug_mode == 1;
+      }) begin
         `uvm_fatal(get_name(), "failed to randomize sa_item")
-      end else begin
-        `uvm_info(get_name(), $sformatf("Item %0d \n %s", i, sa_item.convert2string()), UVM_NONE)
       end
       start_item(sa_item);
       finish_item(sa_item);
+      `uvm_info(get_name(), $sformatf("Item %0d \n %s", i, sa_item.convert2string()), UVM_NONE)
     end
   endtask
 endclass

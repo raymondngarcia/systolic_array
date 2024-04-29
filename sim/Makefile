@@ -1,5 +1,5 @@
 GIT_REPO := $(shell git rev-parse --show-toplevel)
-include $(GIT_REPO)/hw/scripts/flow_makefiles/_pre.mk
+include $(GIT_REPO)/_pre.mk
 
 ########################################
 ##@ Simulation setup:
@@ -108,14 +108,14 @@ BENDER_TARGETS += simulation
 ########################################
 ## Questasim specific
 ########################################
-include $(GIT_REPO)/hw/scripts/flow_makefiles/questasim.mk
+include $(GIT_REPO)/questasim.mk
 
 ########################################
 ## VCS specific
 ########################################
-include $(GIT_REPO)/hw/scripts/flow_makefiles/vcs.mk
+include $(GIT_REPO)/vcs.mk
 
 ########################################
 ## Clean targets:
 ########################################
-include $(GIT_REPO)/hw/scripts/flow_makefiles/_post.mk
+include $(GIT_REPO)/_post.mk

@@ -4,6 +4,6 @@
 IP_NAME            = systolic_array
 TOP_LEVEL_MODULES  = hdl_top
 
-BENDER_MANI_LOC := $(GIT_REPO)/hw/vendor/axelera/systolic_array/uvm
+BENDER_MANI_LOC := $(GIT_REPO)/uvm
 
 

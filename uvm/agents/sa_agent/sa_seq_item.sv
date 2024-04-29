@@ -5,20 +5,24 @@ class sa_seq_item#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends u
   `uvm_object_param_utils(sa_seq_item#(DIN_WIDTH, N))
 
   typedef sa_seq_item#(DIN_WIDTH, N) this_t;
+  typedef bit signed [N-1:0][2*DIN_WIDTH-1:0] ab_data_t;
+  typedef bit signed [N-1:0][2*DIN_WIDTH-1:0] c_data_t;
 
   static int unsigned a_counter = 1;
   static int unsigned b_counter = 1;
   static int unsigned c_counter = 1;
 
-  rand bit signed [N-1:0][2*DIN_WIDTH-1:0] c_din;
-  rand bit signed [N-1:0][DIN_WIDTH-1:0]   a_din;
-  rand bit signed [N-1:0][DIN_WIDTH-1:0]   b_din;
-  rand bit signed [N-1:0][2*DIN_WIDTH-1:0] c_dout;
+  rand c_data_t  c_din;
+  rand ab_data_t a_din;
+  rand ab_data_t b_din;
+  rand c_data_t  c_dout;
 
-  constraint abc_data_c {
-    foreach (a_din[i]) soft a_din[i] == i+a_counter; // TODO: for easy debug, remove once tb is mature
-    foreach (b_din[i]) soft b_din[i] == i+b_counter; // TODO: for easy debug, remove once tb is mature
-    foreach (c_din[i]) soft c_din[i] == i+c_counter; // TODO: for easy debug, remove once tb is mature
+  rand bit debug_mode;
+
+  constraint abc_debug_data_c {
+    foreach (a_din[i]) (debug_mode) -> soft a_din[i] == i+a_counter;
+    foreach (b_din[i]) (debug_mode) -> soft b_din[i] == (i+b_counter) * 10;
+    foreach (c_din[i]) (debug_mode) -> soft c_din[i] == (i+c_counter) * 100;
   }
 
   rand bit in_valid;
@@ -26,6 +30,28 @@ class sa_seq_item#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends u
 
   function new (string name = "sa_seq_item");
     super.new (name);
+  endfunction
+
+  virtual function void compute_cout();
+    // Perform matrix multiplication
+    for (int i = 0; i < N; i++) begin
+      for (int j = 0; j < N; j++) begin
+        c_dout[i][j] = 0;
+        for (int k = 0; k < N; k++) begin
+            c_dout[i][j] += a_din[i][k] * b_din[k][j] + c_din[i][j];
+        end
+      end
+    end
+  endfunction
+
+  virtual function bit has_cout_mismatch(c_data_t c);
+    for (int i = 0; i < N; i++) begin
+      if (c[i] != c_din[i]) begin
+        `uvm_error(get_type_name, $sformatf("Mismatch in COUT[%0d]! Exp: 0x%0x Act: 0x%0x", i, c_din[i], c[i]))
+        return 1;
+      end
+    end
+    return 0;
   endfunction
 
   virtual function this_t do_clone();
@@ -72,9 +98,11 @@ class sa_seq_item#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends u
 
   function void post_randomize();
     super.post_randomize();
-    a_counter += N;
-    b_counter += N;
-    c_counter += N;
+    if (debug_mode) begin
+      a_counter += N;
+      b_counter += N;
+      c_counter += N;
+    end
   endfunction
 
 endclass
