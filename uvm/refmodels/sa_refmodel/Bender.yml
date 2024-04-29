@@ -1,16 +1,16 @@
 package:
-  name: ai_core_ls_uvm_ifd_odr_ref
-  description: "UVM IFD ODR Address Gen Reference Model for AI CORE LS"
+  name: sa_uvm_refmodel
+  description: "SA UVM Reference Model"
   authors:
-    - "raymond.garcia@axelera.ai"
+    - "raymondngarcia"
 
 dependencies:
-  uvm:                         { path: "../../../common/uvm"}
-  ai_core_ls_uvm_ifd_odr_agt:  { path: "../../agents/ifd_odr_addr_gen"}
+  uvm:           { path: "../../../uvm_pkg"}
+  sa_uvm_agent:  { path: "../../agents/sa_agent"}
 
 sources:
   - target: simulation
     include_dirs:
       - .
     files:
-      - ifd_odr_addr_gen_ref_model_pkg.sv
+      - sa_refmodel_pkg.sv

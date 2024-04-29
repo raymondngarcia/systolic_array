@@ -2,7 +2,7 @@ package:
   name: sa_uvm_tb
   description: "SA DV UVM TB"
   authors:
-    - "raymond.garcia"
+    - "raymondngarcia"
 
 dependencies:
   uvm        :    { path: "../uvm_pkg"}

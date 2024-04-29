@@ -2,7 +2,7 @@ package:
   name: sa_uvm_agent
   description: "SA UVM Agent"
   authors:
-    - "raymond.garcia"
+    - "raymondngarcia"
 
 dependencies:
   uvm        :    { path: "../../../uvm_pkg"}

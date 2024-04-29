@@ -2,7 +2,7 @@ package:
   name: sa_uvm_test
   description: "Tests for SA UVM Testbench"
   authors:
-    - "raymond.garcia"
+    - "raymondngarcia"
 
 dependencies:
   sa_uvm_seq:            { path: "../sequences" }

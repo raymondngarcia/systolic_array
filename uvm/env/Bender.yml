@@ -2,10 +2,12 @@ package:
   name: sa_uvm_env
   description: "UVM Environment for SA"
   authors:
-    - "raymond.garcia"
+    - "raymondngarcia"
 
 dependencies:
   sa_uvm_agent:                { path: "../agents/sa_agent" }
+  sa_uvm_refmodel:             { path: "../refmodels/sa_refmodel" }
+  sa_uvm_sb:                   { path: "../scoreboards/sa_sb" }
 
 sources:
   - target: simulation

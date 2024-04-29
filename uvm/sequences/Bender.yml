@@ -2,7 +2,7 @@ package:
   name: sa_uvm_seq
   description: "UVM Sequences for SA Testbench"
   authors:
-    - "raymond.garcia"
+    - "raymondngarcia"
 
 dependencies:
   sa_uvm_env:            { path: "../env" }
