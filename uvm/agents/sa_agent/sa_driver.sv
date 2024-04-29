@@ -1,16 +1,19 @@
 `ifndef __SA_DRIVER_SV__
 `define __SA_DRIVER_SV__
 
-class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_driver #(sa_seq_item#(DIN_WIDTH, N));;
-  `uvm_component_param_utils(sa_driver#(DIN_WIDTH, N))
+class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned M = 'd4) extends uvm_driver #(sa_seq_item#(DIN_WIDTH, N, M));
+  `uvm_component_param_utils(sa_driver#(DIN_WIDTH, N, M))
 
-  typedef sa_seq_item#(DIN_WIDTH, N)   seq_item_t;
+  typedef sa_seq_item#(DIN_WIDTH, N, M)   seq_item_t;
   typedef bit signed [2*DIN_WIDTH-1:0] c_data_t;
   typedef bit signed [DIN_WIDTH-1:0]   ab_data_t;
   typedef enum { A_DIN, B_DIN, C_DIN, C_DOUT } drv_port_t;
 
   semaphore    sem;
-  int          lane_delay_done;
+  bit          lane_a_delay_done;
+  bit          lane_b_delay_done;
+  bit          lane_cin_delay_done;
+  bit          lane_cout_delay_done;
 
   function new (string name, uvm_component parent);
     super.new (name, parent);
@@ -19,9 +22,11 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
   virtual sa_if#(DIN_WIDTH, N) vif;
   sa_cfg                       cfg;
 
+  seq_item_t sa_q[$];
+
   c_data_t                     cin_q[N][$];
   ab_data_t                    a_q[N][$];
-  ab_data_t                    b_q[N][$];
+  ab_data_t                    b_q[M][$];
   c_data_t                     cout_q[N][$];
 
   bit first_cout_ready;
@@ -43,27 +48,60 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
     ab_data_t                    b;
     c_data_t                     cout;
 
-    for (int i =0; i < N; i++) begin
-      cin  = itm.c_din[i];
-      a    = itm.a_din[i];
-      b    = itm.b_din[i];
-      cout = itm.c_dout[i];
-
-      if (lane_delay_done==0) begin
-        // delay
-        for (int i=1; i < N; i++) begin
-          repeat (i) a_q[i].push_back(0);
-          repeat (i) b_q[i].push_back(0);
-          repeat (i) cin_q[i].push_back(0);
-          repeat (i) cout_q[i].push_back(0);
+    for (int i =0; i < M; i++) begin
+      for (int j =0; j < N; j++) begin
+        a = itm.a_din[i][j];
+        if (lane_a_delay_done==0) begin
+          // delay
+          for (int n=1; n < N; n++) begin
+            repeat (n) a_q[n].push_back(0);
+          end
         end
-        lane_delay_done = 1;
+        lane_a_delay_done = 1;
+        a_q[j].push_back(a);
       end
+    end
 
-      cin_q[i].push_back(cin);
-      a_q[i].push_back(a);
-      b_q[i].push_back(b);
-      cout_q[i].push_back(cout);
+    for (int i =0; i < N; i++) begin
+      for (int j =0; j < M; j++) begin
+        b = itm.b_din[i][j];
+        if (lane_b_delay_done==0) begin
+          // delay
+          for (int m=1; m < M; m++) begin
+            repeat (m) b_q[m].push_back(0);
+          end
+        end
+        lane_b_delay_done = 1;
+        b_q[j].push_back(b);
+      end
+    end
+
+    for (int i =0; i < N; i++) begin
+      for (int j =0; j < N; j++) begin
+        cin = itm.c_din[i][j];
+        if (lane_cin_delay_done==0) begin
+          // delay
+          for (int n=1; n < N; n++) begin
+            repeat (n) cin_q[n].push_back(0);
+          end
+        end
+        lane_cin_delay_done = 1;
+        cin_q[j].push_back(cin);
+      end
+    end
+
+    for (int i =0; i < N; i++) begin
+      for (int j =0; j < N; j++) begin
+        cout = itm.c_dout[i][j];
+        if (lane_cout_delay_done==0) begin
+          // delay
+          for (int n=1; n < N; n++) begin
+            repeat (n) cout_q[n].push_back(0);
+          end
+        end
+        lane_cout_delay_done = 1;
+        cout_q[j].push_back(cout);
+      end
     end
 
   endfunction
@@ -123,7 +161,7 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
       @(vif.drv);
       vif.drv.in_valid <= 0;
       if (is_size_not_zero(A_DIN)) begin
-        if (delay_count >= cfg.m_a_delay_cycles || delay_done) begin
+        if (delay_count >= M || delay_done) begin
 
           for (int i=0; i< N; i++) begin
             if (a_q[i].size() >0) begin
@@ -135,7 +173,7 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
           `uvm_info(get_name(), "driver: drive_a() done!", UVM_NONE)
 
           // process in_valid
-          if ((delay_count-cfg.m_a_delay_cycles) >= 2*N-2 ) begin
+          if ((delay_count-M) >= 2*N-2 ) begin
             if (!in_valid_done) begin
               vif.drv.in_valid <= 1;
               b2b_in_count = 1;
@@ -178,12 +216,14 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
   virtual task drive_cin();
     int delay_count = 0;
     bit delay_done = 0;
+    int b2b_in_count;
+    bit in_valid_done;
     c_data_t c_var;
 
     forever begin
       @(vif.drv);
       if (is_size_not_zero(C_DIN)) begin
-        if (delay_count >= cfg.m_c_delay_cycles || delay_done) begin
+        if (delay_count >= M || delay_done) begin
 
           for (int i=0; i< N; i++) begin
             if (cin_q[i].size() >0) begin
@@ -192,7 +232,8 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
             end
           end
           delay_done = 1;
-          `uvm_info(get_name(), "driver: drive_cin() done!", UVM_NONE)
+          `uvm_info(get_name(), "driver: drive_a() done!", UVM_NONE)
+
         end
         delay_count += 1;
       end
@@ -211,7 +252,7 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
       vif.drv.out_valid <= 0;
 
       if (is_size_not_zero(C_DOUT)) begin
-        if (delay_count >= get_matrix_delay() || delay_done) begin
+        if (delay_count >= get_matrix_delay()-1 || delay_done) begin
 
           for (int i=0; i< N; i++) begin
             if (cout_q[i].size() >0) begin
@@ -266,7 +307,10 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm
         b_q[i].delete();
         cout_q[i].delete();
       end
-      lane_delay_done = 0;
+      lane_a_delay_done = 0;
+      lane_b_delay_done = 0;
+      lane_cin_delay_done = 0;
+      lane_cout_delay_done = 0;
     end
   endtask
 endclass

@@ -3,7 +3,7 @@
 
 package sa_pkg;
 
-  parameter int unsigned N = 3;
+  parameter int unsigned N = 2;
   parameter int unsigned M = 2;
   parameter int unsigned DIN_WIDTH = 8;
 

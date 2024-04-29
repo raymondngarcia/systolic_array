@@ -1,14 +1,14 @@
 `ifndef __SA_AGENT_SV__
 `define __SA_AGENT_SV__
 
-class sa_agent#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_agent;
-  `uvm_component_param_utils(sa_agent#(DIN_WIDTH, N))
+class sa_agent#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned M = 'd4) extends uvm_agent;
+  `uvm_component_param_utils(sa_agent#(DIN_WIDTH, N, M))
 
-  virtual sa_if#(DIN_WIDTH, N)                vif;
-  sa_monitor#(DIN_WIDTH, N)                   mon;
-  sa_driver#(DIN_WIDTH, N)                    drv;
-  uvm_sequencer#(sa_seq_item#(DIN_WIDTH, N))  sqr;
-  sa_cfg                                      cfg_h;
+  virtual sa_if#(DIN_WIDTH, N)                  vif;
+  sa_monitor#(DIN_WIDTH, N, M)                  mon;
+  sa_driver#(DIN_WIDTH, N, M)                   drv;
+  uvm_sequencer#(sa_seq_item#(DIN_WIDTH, N, M)) sqr;
+  sa_cfg                                        cfg_h;
 
   function new (string name, uvm_component parent);
     super.new (name, parent);
@@ -26,11 +26,11 @@ class sa_agent#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_
     end
 
     if (cfg_h.is_active == 1) begin
-      drv = sa_driver#(DIN_WIDTH, N)::type_id::create("drv",this);
+      drv = sa_driver#(DIN_WIDTH, N, M)::type_id::create("drv",this);
       drv.cfg = cfg_h;
-      sqr = uvm_sequencer#(sa_seq_item#(DIN_WIDTH, N))::type_id::create("sqr",this);
+      sqr = uvm_sequencer#(sa_seq_item#(DIN_WIDTH, N, M))::type_id::create("sqr",this);
     end
-    mon = sa_monitor#(DIN_WIDTH, N)::type_id::create("mon",this);
+    mon = sa_monitor#(DIN_WIDTH, N, M)::type_id::create("mon",this);
   endfunction
 
   virtual function void connect_phase(uvm_phase phase);

@@ -1,12 +1,12 @@
 `ifndef __SA_SB_SV__
 `define __SA_SB_SV__
-class sa_sb#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_scoreboard;
-  `uvm_component_param_utils(sa_sb#(DIN_WIDTH, N))
+class sa_sb#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned M = 'd4) extends uvm_scoreboard;
+  `uvm_component_param_utils(sa_sb#(DIN_WIDTH, N, M))
 
-  typedef sa_seq_item#(DIN_WIDTH, N) sa_seq_item_t;
+  typedef sa_seq_item#(DIN_WIDTH, N, M) sa_seq_item_t;
 
-  sa_seq_item_t mon_item;
-  sa_seq_item_t mdl_item;
+  sa_seq_item_t exp_item;
+  sa_seq_item_t act_item;
 
   uvm_tlm_analysis_fifo#(sa_seq_item_t) act_fifo;
   uvm_tlm_analysis_fifo#(sa_seq_item_t) exp_fifo;
@@ -21,8 +21,8 @@ class sa_sb#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_sco
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    mon_item = sa_seq_item_t::type_id::create("mon_item");
-    mdl_item = sa_seq_item_t::type_id::create("mdl_item");
+    exp_item = sa_seq_item_t::type_id::create("exp_item");
+    act_item = sa_seq_item_t::type_id::create("act_item");
     act_fifo = new("act_fifo", this);
     exp_fifo = new("exp_fifo", this);
   endfunction : build_phase
@@ -33,7 +33,15 @@ class sa_sb#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_sco
     forever begin
       fork
         forever begin
-          act_fifo.get(mon_item);
+          act_fifo.get(act_item);
+          act_cnt+= 1;
+          exp_fifo.get(exp_item);
+          exp_cnt+= 1;
+          if (act_item.compare(exp_item)) begin
+            `uvm_info(get_name(), $sformatf("SB Match! %s", act_item.convert2string()), UVM_NONE)
+          end else begin
+            `uvm_error(get_name(), $sformatf("SB Mismatch! Exp: %s Act: %s", exp_item.convert2string(), act_item.convert2string()))
+          end
 
         end
         begin
@@ -58,7 +66,7 @@ class sa_sb#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4) extends uvm_sco
     if (!act_fifo.is_empty()) begin
       `uvm_error(get_name, $sformatf("act_fifo is not empty with %0d items", act_fifo.used()))
     end
-    if (mon_cnt != mdl_cnt) begin
+    if (exp_cnt != act_cnt) begin
       `uvm_error(get_name, $sformatf("number of received items RTL vs MDL mismatch, mdl: %0d rtl: %0d",act_cnt,exp_cnt))
     end
   endfunction

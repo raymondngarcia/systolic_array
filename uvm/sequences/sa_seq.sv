@@ -4,7 +4,7 @@
 class sa_seq extends uvm_sequence;
   `uvm_object_utils(sa_seq)
 
-  typedef sa_seq_item#(sa_pkg::DIN_WIDTH, sa_pkg::N) sa_item_t;
+  typedef sa_seq_item#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M) sa_item_t;
   sa_env                    m_env_h;
   rand int unsigned         m_iteration;
 
@@ -35,6 +35,7 @@ class sa_seq extends uvm_sequence;
       }) begin
         `uvm_fatal(get_name(), "failed to randomize sa_item")
       end
+
       start_item(sa_item);
       finish_item(sa_item);
       `uvm_info(get_name(), $sformatf("Item %0d \n %s", i, sa_item.convert2string()), UVM_NONE)
