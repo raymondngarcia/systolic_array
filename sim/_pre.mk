@@ -84,54 +84,6 @@ ifeq ("$(GRID_ENABLE)", "1")
 GRID_CMD  = srun $(GRID_OPTS) $(GRID_OPTS_EXT)
 endif
 
-
-########################################
-##@ IP Generators
-########################################
-
-# Include data file listings
-#include $(GIT_REPO)/_pre_csr.mk
-
-# Generate the expected list of generated output file names
-_GEN_REGS = $(subst .hjson,_reg_top.sv,$(subst data,rtl/build_reg,$(CSR_IP_LIST)))
-
-# This will make sure that only the CSR hjson for which a partiular rule triggered will be part of the prerequisites
-.SECONDEXPANSION: $(_GEN_REGS)
-$(_GEN_REGS): $$(subst rtl/build_reg,data,$$(subst _reg_top.sv,.hjson,$$@))
-	mkdir -p $(dir $@)
-	regtool \
-		-r $< \
-		-t $(dir $@)
-
-# Capture all registers to be generated
-FLOW_PREREQUISITES += gen_reg
-gen_reg: $(_GEN_REGS) ## Generate all regtool registers
-
-CLEAN_PREREQUISITES += clean_reg
-.PHONY: clean_reg
-clean_reg: ## Remove all generated registers and virtualenv
-	rm -rf $(dir $(_GEN_REGS))
-
-# Generate the expected list of generated output file names
-_GEN_RALS = $(subst .hjson,_ral_pkg.sv,$(subst data,dv/build_ral,$(CSR_IP_LIST)))
-
-# This will make sure that only the CSR hjson for which a partiular rule triggered will be part of the prerequisites
-.SECONDEXPANSION: $(_GEN_RALS)
-$(_GEN_RALS): $$(subst dv/build_ral,data,$$(subst _ral_pkg.sv,.hjson,$$@))
-	mkdir -p $(dir $@)
-	regtool \
-		-s $< \
-		-t $(dir $@)
-
-# Capture all registers to be generated
-FLOW_PREREQUISITES += gen_ral
-gen_ral: $(_GEN_RALS) ## Generate all regtool registers
-
-CLEAN_PREREQUISITES += clean_ral
-.PHONY: clean_ral
-clean_ral: ## Remove all generated registers and virtualenv
-	rm -rf $(dir $(_GEN_RALS))
-
 ########################################
 ##@ Bender Variables:
 ########################################

@@ -1,5 +1,5 @@
 GIT_REPO := $(shell git rev-parse --show-toplevel)
-include $(GIT_REPO)/_pre.mk
+include $(GIT_REPO)/sim/_pre.mk
 
 ########################################
 ##@ Simulation setup:
@@ -106,16 +106,11 @@ BENDER_TARGETS += rtl
 BENDER_TARGETS += simulation
 
 ########################################
-## Questasim specific
-########################################
-include $(GIT_REPO)/questasim.mk
-
-########################################
 ## VCS specific
 ########################################
-include $(GIT_REPO)/vcs.mk
+include $(GIT_REPO)/sim/vcs.mk
 
-########################################
-## Clean targets:
-########################################
-include $(GIT_REPO)/_post.mk
+.PHONY: clean
+clean:
+	rm -rf build_*
+	find $(MAKEFILE) -name \Bender.lock -type f -delete
