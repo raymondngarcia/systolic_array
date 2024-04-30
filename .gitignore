@@ -3,7 +3,6 @@
 
 # Build
 build*/
-*.log
 
 # Bender lock files are also ignored
 Bender.lock

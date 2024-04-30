@@ -1,0 +1,554 @@
+Command: ./sim/systolic_array_elab -reportstats -licqueue -assert global_finish_maxfail=1 -assert errmsg +UVM_VERBOSITY=UVM_LOW -ucli -do ../dump_vpd.tcl +UVM_TESTNAME=sa_sanity_test +ntb_random_seed=1 -l sim.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03-SP2-1_Full64; Runtime version U-2023.03-SP2-1_Full64;  Apr 30 18:47 2024
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2.Synopsys
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+ucli% # TCL file invoked from VCS's simv at run-time using this: -ucli -do <this file>
+ucli% if {[info exists ::env(TESTNAME)]} {
+  set dumpname $::env(TESTNAME)
+} else {
+  set dumpname "test"
+}
+sa_sanity_test
+ucli% append dumpname "_seed_"
+sa_sanity_test_seed_
+ucli% if {[info exists ::env(SEED)]} {
+  append dumpname $::env(SEED)
+  append dumpname "."
+} else {
+  append dumpname "1."
+}
+sa_sanity_test_seed_1.
+ucli% if {[info exists ::env(VCS_DUMP_TYPE)]} {
+  append dumpname $::env(VCS_DUMP_TYPE)
+}
+sa_sanity_test_seed_1.vpd
+ucli% dump -file $dumpname -type VPD
+VCD+ Writer U-2023.03-SP2-1_Full64 Copyright (c) 1991-2023 by Synopsys Inc.
+VPD0
+ucli% call {$vcdpluson(0, hdl_top)}
+ucli% run
+UVM_INFO @ 0.000 ns: reporter [RNTST] Running test sa_sanity_test...
+UVM_INFO ./uvm/tests/sa_base_test.sv(18) @ 0.000 ns: uvm_test_top [uvm_test_top] build_phase() started.
+UVM_INFO ./uvm/agents/sa_agent/sa_cfg.sv(49) @ 0.000 ns: reporter [m_sa_cfg] 
+----------- SA Config ----------------
+ Instance            : m_sa_cfg
+ m_din_width         : 8
+ m_N                 : 2
+ m_M                 : 2
+ is_active           : 1
+ in_valid_seq_ctrl   : 0
+ out_valid_seq_ctrl  : 0
+---------------------------------------------
+UVM_INFO ./uvm/env/sa_env.sv(18) @ 0.000 ns: uvm_test_top.m_env [build_phase] Entered...
+UVM_INFO ./uvm/env/sa_env.sv(32) @ 0.000 ns: uvm_test_top.m_env [m_env] Exiting build_phase...
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(40) @ 0.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver cfg: 
+----------- SA Config ----------------
+ Instance            : m_sa_cfg
+ m_din_width         : 8
+ m_N                 : 2
+ m_M                 : 2
+ is_active           : 1
+ in_valid_seq_ctrl   : 0
+ out_valid_seq_ctrl  : 0
+---------------------------------------------
+UVM_INFO ./uvm/env/sa_env.sv(36) @ 0.000 ns: uvm_test_top.m_env [connect_phase] Entered...
+UVM_INFO ./uvm/env/sa_env.sv(43) @ 0.000 ns: uvm_test_top.m_env [m_env] Exiting connect_phase...
+UVM_INFO ./uvm/tests/sa_base_test.sv(30) @ 0.000 ns: uvm_test_top [uvm_test_top] end_of_elaboration_phase() started.
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh(589) @ 0.000 ns: reporter [UVMTOP] UVM testbench topology:
+---------------------------------------------------------------------
+Name                       Type                           Size  Value
+---------------------------------------------------------------------
+uvm_test_top               sa_sanity_test                 -     @343 
+  m_env                    sa_env                         -     @360 
+    m_sa_agt               uvm_agent                      -     @373 
+      drv                  uvm_driver #(REQ,RSP)          -     @404 
+        rsp_port           uvm_analysis_port              -     @423 
+        seq_item_port      uvm_seq_item_pull_port         -     @413 
+      mon                  uvm_monitor                    -     @570 
+        to_refmodel_port   uvm_analysis_port              -     @581 
+        to_sb_act_port     uvm_analysis_port              -     @591 
+      sqr                  uvm_sequencer                  -     @433 
+        rsp_export         uvm_analysis_export            -     @442 
+        seq_item_export    uvm_seq_item_pull_imp          -     @560 
+        arbitration_queue  array                          0     -    
+        lock_queue         array                          0     -    
+        num_last_reqs      integral                       32    'd1  
+        num_last_rsps      integral                       32    'd1  
+    m_sa_refmodel          sa_refmodel#(DIN_WIDTH, N, M)  -     @382 
+      seq_item_in          uvm_tlm_analysis_fifo #(T)     -     @606 
+        analysis_export    uvm_analysis_imp               -     @655 
+        get_ap             uvm_analysis_port              -     @645 
+        get_peek_export    uvm_get_peek_imp               -     @625 
+        put_ap             uvm_analysis_port              -     @635 
+        put_export         uvm_put_imp                    -     @615 
+      seq_item_out         uvm_analysis_port              -     @665 
+    m_sa_sb                uvm_scoreboard                 -     @391 
+      act_fifo             uvm_tlm_analysis_fifo #(T)     -     @683 
+        analysis_export    uvm_analysis_imp               -     @732 
+        get_ap             uvm_analysis_port              -     @722 
+        get_peek_export    uvm_get_peek_imp               -     @702 
+        put_ap             uvm_analysis_port              -     @712 
+        put_export         uvm_put_imp                    -     @692 
+      exp_fifo             uvm_tlm_analysis_fifo #(T)     -     @742 
+        analysis_export    uvm_analysis_imp               -     @791 
+        get_ap             uvm_analysis_port              -     @781 
+        get_peek_export    uvm_get_peek_imp               -     @761 
+        put_ap             uvm_analysis_port              -     @771 
+        put_export         uvm_put_imp                    -     @751 
+---------------------------------------------------------------------
+
+UVM_INFO ./uvm/tests/sa_base_test.sv(32) @ 0.000 ns: uvm_test_top [uvm_test_top] end_of_elaboration_phase() ended.
+UVM_INFO ./uvm/tests/sa_base_test.sv(43) @ 0.000 ns: uvm_test_top [uvm_test_top] reset_phase() started.
+UVM_INFO ./uvm/tests/sa_base_test.sv(45) @ 0.000 ns: uvm_test_top [uvm_test_top] reset_phase() ended.
+UVM_INFO ./uvm/tests/sa_base_test.sv(52) @ 0.000 ns: uvm_test_top [uvm_test_top] main_phase() started.
+UVM_INFO ./uvm/tests/sa_sanity_test.sv(14) @ 0.000 ns: uvm_test_top [uvm_test_top] Start of test
+UVM_INFO ./uvm/sequences/sa_seq.sv(21) @ 0.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] pre_body() started.
+UVM_INFO ./uvm/sequences/sa_seq.sv(25) @ 0.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] pre_body() ended.
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 1.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 1.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 1.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 1.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 1.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 0 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ b_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_dout (2x2)   : '{'{8, 12}, '{18, 26}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 2.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 2.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 2.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 2.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 1 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ b_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_dout (2x2)   : '{'{72, 84}, '{98, 114}} 
+ in_valid : 0x1
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 2 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ b_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_dout (2x2)   : '{'{200, 220}, '{242, 266}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 3.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 3 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ b_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_dout (2x2)   : '{'{392, 420}, '{450, 482}} 
+ in_valid : 0x1
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 4 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ b_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_dout (2x2)   : '{'{648, 684}, '{722, 762}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 4.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ b_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_dout (2x2)   : '{'{8, 12}, '{18, 26}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 4.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 5 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ b_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_dout (2x2)   : '{'{968, 1012}, '{1058, 1106}} 
+ in_valid : 0x0
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{0, 0, 0, 0, 8, 18, 72} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{0, 0, 0, 0, 0, 12, 26} 
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 5.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ b_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_dout (2x2)   : '{'{8, 12}, '{18, 26}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 5.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 6 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ b_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_dout (2x2)   : '{'{1352, 1404}, '{1458, 1514}} 
+ in_valid : 0x1
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 6.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ b_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_dout (2x2)   : '{'{72, 84}, '{98, 114}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 7 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ b_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_dout (2x2)   : '{'{1800, 1860}, '{1922, 1986}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{72, 98, 200} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{84, 114} 
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(124) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(117) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 6.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ b_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_dout (2x2)   : '{'{72, 84}, '{98, 114}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/sequences/sa_seq.sv(41) @ 6.000 ns: uvm_test_top.m_env.m_sa_agt.sqr@@m_sa_seq [m_sa_seq] Item 8 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ b_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_dout (2x2)   : '{'{2312, 2380}, '{2450, 2522}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 7.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 7.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 7.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 7.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 7.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ b_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_dout (2x2)   : '{'{200, 220}, '{242, 266}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{200, 242, 392} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{220, 266} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 8.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ b_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_dout (2x2)   : '{'{200, 220}, '{242, 266}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 8.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 8.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ b_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_dout (2x2)   : '{'{392, 420}, '{450, 482}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{392, 450, 648} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{420, 482} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 9.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ b_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_dout (2x2)   : '{'{392, 420}, '{450, 482}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 9.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 9.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ b_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_dout (2x2)   : '{'{648, 684}, '{722, 762}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 10.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 10.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 10.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 10.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 10.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{648, 722, 968} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 10.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{684, 762} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 10.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ b_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_dout (2x2)   : '{'{648, 684}, '{722, 762}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 11.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ b_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_dout (2x2)   : '{'{968, 1012}, '{1058, 1106}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{968, 1058, 1352} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 11.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1012, 1106} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 11.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ b_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_dout (2x2)   : '{'{968, 1012}, '{1058, 1106}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 12.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 12.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 12.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 12.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 12.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ b_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_dout (2x2)   : '{'{1352, 1404}, '{1458, 1514}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(210) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_b() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{1352, 1458, 1800} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1404, 1514} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 13.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ b_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_dout (2x2)   : '{'{1352, 1404}, '{1458, 1514}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 13.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 13.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ b_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_dout (2x2)   : '{'{1800, 1860}, '{1922, 1986}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(173) @ 14.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(235) @ 14.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_a() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 14.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 14.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{1800, 1922, 2312} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 14.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1860, 1986} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 14.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ b_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_dout (2x2)   : '{'{1800, 1860}, '{1922, 1986}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_driver.sv(272) @ 14.000 ns: uvm_test_top.m_env.m_sa_agt.drv [drv] driver: drive_cout() done!
+UVM_INFO ./uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 14.000 ns: uvm_test_top.m_env.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ b_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_dout (2x2)   : '{'{2312, 2380}, '{2450, 2522}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 15.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [0] '{2312, 2450, 0} 
+UVM_INFO ./uvm/agents/sa_agent/sa_monitor.sv(148) @ 15.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] Matrix C-OUT [1] '{2380, 2522} 
+UVM_INFO ./uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 15.000 ns: uvm_test_top.m_env.m_sa_sb [m_sa_sb] SB Match! 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ b_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_dout (2x2)   : '{'{2312, 2380}, '{2450, 2522}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO ./uvm/tests/sa_sanity_test.sv(25) @ 106.000 ns: uvm_test_top [uvm_test_top] End of test
+UVM_INFO ./uvm/tests/sa_base_test.sv(54) @ 106.000 ns: uvm_test_top [uvm_test_top] main_phase() ended.
+UVM_INFO ./uvm/tests/sa_base_test.sv(61) @ 106.000 ns: uvm_test_top [uvm_test_top] final_phase() started.
+UVM_INFO ./uvm/tests/sa_base_test.sv(66) @ 106.000 ns: uvm_test_top [uvm_test_top] 
+ SIMULATION RESULT: P-A-S-S-E-D
+
+UVM_INFO ./uvm/tests/sa_base_test.sv(68) @ 106.000 ns: uvm_test_top [uvm_test_top] final_phase() ended.
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_report_catcher.svh(705) @ 106.000 ns: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_report_server.svh(904) @ 106.000 ns: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  164
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[build_phase]     1
+[connect_phase]     1
+[drv]    96
+[m_env]     2
+[m_sa_cfg]     1
+[m_sa_refmodel]     9
+[m_sa_sb]     9
+[m_sa_seq]    11
+[mon]    18
+[uvm_test_top]    12
+
+$finish called from file "/opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh", line 527.
+$finish at simulation time 106.260 ns
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 106260 ps
+
+Simulation Performance Summary
+==============================
+Simulation started at :  Tue Apr 30 18:47:29 2024
+Elapsed Time          :  1 sec
+CPU Time              :  0.3 sec
+Virtual memory size   :  388.2 MB
+Resident set size     :  122.8 MB
+Shared memory size    :  2.9 MB
+Private memory size   :  119.9 MB
+Major page faults     :  6
+Machine name          :  htz1-cnode17
+==============================
+
+Tue Apr 30 18:47:29 2024
