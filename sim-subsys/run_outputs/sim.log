@@ -1,0 +1,918 @@
+Command: /home/projects_2/workspace/raymond/europa/europa/sim-subsys/build_vcs_sa_subsys/compile_vcs/sa_subsys_elab -reportstats -licqueue -assert global_finish_maxfail=1 -assert errmsg +UVM_VERBOSITY=UVM_LOW -ucli -do ../../dump_vpd.tcl +UVM_TESTNAME=sa_subsys_sanity_test +ntb_random_seed=1 -l sim.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03-SP2-1_Full64; Runtime version U-2023.03-SP2-1_Full64;  May  1 14:07 2024
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2.Synopsys
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'sa_refmodel#(DIN_WIDTH, N, M)' already registered with factory. No string-based lookup support for multiple types with the same type name.
+ucli% # TCL file invoked from VCS's simv at run-time using this: -ucli -do <this file>
+ucli% if {[info exists ::env(TESTNAME)]} {
+  set dumpname $::env(TESTNAME)
+} else {
+  set dumpname "test"
+}
+sa_subsys_sanity_test
+ucli% append dumpname "_seed_"
+sa_subsys_sanity_test_seed_
+ucli% if {[info exists ::env(SEED)]} {
+  append dumpname $::env(SEED)
+  append dumpname "."
+} else {
+  append dumpname "1."
+}
+sa_subsys_sanity_test_seed_1.
+ucli% if {[info exists ::env(VCS_DUMP_TYPE)]} {
+  append dumpname $::env(VCS_DUMP_TYPE)
+}
+sa_subsys_sanity_test_seed_1.vpd
+ucli% dump -file $dumpname -type VPD
+VCD+ Writer U-2023.03-SP2-1_Full64 Copyright (c) 1991-2023 by Synopsys Inc.
+VPD0
+ucli% call {$vcdpluson(0, hdl_top)}
+ucli% run
+UVM_INFO @ 0.000 ns: reporter [RNTST] Running test sa_subsys_sanity_test...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(22) @ 0.000 ns: uvm_test_top [uvm_test_top] build_phase() started.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_cfg.sv(63) @ 0.000 ns: reporter [m_sa_cfg] 
+----------- SA Config ----------------
+ Instance               : m_sa_cfg
+ is_active              : 1
+ in_valid_seq_ctrl      : 1
+ out_valid_seq_ctrl     : 1
+ drive_cin              : 1
+ enable_protocol_check  : 1
+ has_coverage           : 0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_cfg.sv(63) @ 0.000 ns: reporter [m_sa_cfg] 
+----------- SA Config ----------------
+ Instance               : m_sa_cfg
+ is_active              : 1
+ in_valid_seq_ctrl      : 1
+ out_valid_seq_ctrl     : 1
+ drive_cin              : 1
+ enable_protocol_check  : 1
+ has_coverage           : 0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(18) @ 0.000 ns: uvm_test_top.m_env_0 [build_phase] Entered...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(32) @ 0.000 ns: uvm_test_top.m_env_0 [m_env_0] Exiting build_phase...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(40) @ 0.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver cfg: 
+----------- SA Config ----------------
+ Instance               : m_sa_cfg
+ is_active              : 1
+ in_valid_seq_ctrl      : 1
+ out_valid_seq_ctrl     : 1
+ drive_cin              : 1
+ enable_protocol_check  : 1
+ has_coverage           : 0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(35) @ 0.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] monitor cfg: 
+----------- SA Config ----------------
+ Instance               : m_sa_cfg
+ is_active              : 1
+ in_valid_seq_ctrl      : 1
+ out_valid_seq_ctrl     : 1
+ drive_cin              : 1
+ enable_protocol_check  : 1
+ has_coverage           : 0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(18) @ 0.000 ns: uvm_test_top.m_env_1 [build_phase] Entered...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(32) @ 0.000 ns: uvm_test_top.m_env_1 [m_env_1] Exiting build_phase...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(40) @ 0.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver cfg: 
+----------- SA Config ----------------
+ Instance               : m_sa_cfg
+ is_active              : 1
+ in_valid_seq_ctrl      : 1
+ out_valid_seq_ctrl     : 1
+ drive_cin              : 1
+ enable_protocol_check  : 1
+ has_coverage           : 0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(35) @ 0.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] monitor cfg: 
+----------- SA Config ----------------
+ Instance               : m_sa_cfg
+ is_active              : 1
+ in_valid_seq_ctrl      : 1
+ out_valid_seq_ctrl     : 1
+ drive_cin              : 1
+ enable_protocol_check  : 1
+ has_coverage           : 0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(36) @ 0.000 ns: uvm_test_top.m_env_0 [connect_phase] Entered...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(43) @ 0.000 ns: uvm_test_top.m_env_0 [m_env_0] Exiting connect_phase...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(36) @ 0.000 ns: uvm_test_top.m_env_1 [connect_phase] Entered...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(43) @ 0.000 ns: uvm_test_top.m_env_1 [m_env_1] Exiting connect_phase...
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(38) @ 0.000 ns: uvm_test_top [uvm_test_top] end_of_elaboration_phase() started.
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh(589) @ 0.000 ns: reporter [UVMTOP] UVM testbench topology:
+---------------------------------------------------------------------
+Name                       Type                           Size  Value
+---------------------------------------------------------------------
+uvm_test_top               sa_subsys_sanity_test          -     @350 
+  m_env_0                  uvm_env                        -     @373 
+    m_sa_agt               uvm_agent                      -     @393 
+      drv                  uvm_driver #(REQ,RSP)          -     @424 
+        rsp_port           uvm_analysis_port              -     @443 
+        seq_item_port      uvm_seq_item_pull_port         -     @433 
+      mon                  uvm_monitor                    -     @590 
+        to_refmodel_port   uvm_analysis_port              -     @603 
+        to_sb_act_port     uvm_analysis_port              -     @613 
+      sqr                  uvm_sequencer                  -     @453 
+        rsp_export         uvm_analysis_export            -     @462 
+        seq_item_export    uvm_seq_item_pull_imp          -     @580 
+        arbitration_queue  array                          0     -    
+        lock_queue         array                          0     -    
+        num_last_reqs      integral                       32    'd1  
+        num_last_rsps      integral                       32    'd1  
+    m_sa_refmodel          sa_refmodel#(DIN_WIDTH, N, M)  -     @402 
+      seq_item_in          uvm_tlm_analysis_fifo #(T)     -     @628 
+        analysis_export    uvm_analysis_imp               -     @677 
+        get_ap             uvm_analysis_port              -     @667 
+        get_peek_export    uvm_get_peek_imp               -     @647 
+        put_ap             uvm_analysis_port              -     @657 
+        put_export         uvm_put_imp                    -     @637 
+      seq_item_out         uvm_analysis_port              -     @687 
+    m_sa_sb                uvm_scoreboard                 -     @411 
+      act_fifo             uvm_tlm_analysis_fifo #(T)     -     @705 
+        analysis_export    uvm_analysis_imp               -     @754 
+        get_ap             uvm_analysis_port              -     @744 
+        get_peek_export    uvm_get_peek_imp               -     @724 
+        put_ap             uvm_analysis_port              -     @734 
+        put_export         uvm_put_imp                    -     @714 
+      exp_fifo             uvm_tlm_analysis_fifo #(T)     -     @764 
+        analysis_export    uvm_analysis_imp               -     @813 
+        get_ap             uvm_analysis_port              -     @803 
+        get_peek_export    uvm_get_peek_imp               -     @783 
+        put_ap             uvm_analysis_port              -     @793 
+        put_export         uvm_put_imp                    -     @773 
+  m_env_1                  uvm_env                        -     @382 
+    m_sa_agt               uvm_agent                      -     @825 
+      drv                  uvm_driver #(REQ,RSP)          -     @856 
+        rsp_port           uvm_analysis_port              -     @875 
+        seq_item_port      uvm_seq_item_pull_port         -     @865 
+      mon                  uvm_monitor                    -     @1022
+        to_refmodel_port   uvm_analysis_port              -     @1035
+        to_sb_act_port     uvm_analysis_port              -     @1045
+      sqr                  uvm_sequencer                  -     @885 
+        rsp_export         uvm_analysis_export            -     @894 
+        seq_item_export    uvm_seq_item_pull_imp          -     @1012
+        arbitration_queue  array                          0     -    
+        lock_queue         array                          0     -    
+        num_last_reqs      integral                       32    'd1  
+        num_last_rsps      integral                       32    'd1  
+    m_sa_refmodel          sa_refmodel#(DIN_WIDTH, N, M)  -     @834 
+      seq_item_in          uvm_tlm_analysis_fifo #(T)     -     @1060
+        analysis_export    uvm_analysis_imp               -     @1109
+        get_ap             uvm_analysis_port              -     @1099
+        get_peek_export    uvm_get_peek_imp               -     @1079
+        put_ap             uvm_analysis_port              -     @1089
+        put_export         uvm_put_imp                    -     @1069
+      seq_item_out         uvm_analysis_port              -     @1119
+    m_sa_sb                uvm_scoreboard                 -     @843 
+      act_fifo             uvm_tlm_analysis_fifo #(T)     -     @1137
+        analysis_export    uvm_analysis_imp               -     @1186
+        get_ap             uvm_analysis_port              -     @1176
+        get_peek_export    uvm_get_peek_imp               -     @1156
+        put_ap             uvm_analysis_port              -     @1166
+        put_export         uvm_put_imp                    -     @1146
+      exp_fifo             uvm_tlm_analysis_fifo #(T)     -     @1196
+        analysis_export    uvm_analysis_imp               -     @1245
+        get_ap             uvm_analysis_port              -     @1235
+        get_peek_export    uvm_get_peek_imp               -     @1215
+        put_ap             uvm_analysis_port              -     @1225
+        put_export         uvm_put_imp                    -     @1205
+---------------------------------------------------------------------
+
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(40) @ 0.000 ns: uvm_test_top [uvm_test_top] end_of_elaboration_phase() ended.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(54) @ 0.000 ns: uvm_test_top [uvm_test_top] reset_phase() started.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(56) @ 0.000 ns: uvm_test_top [uvm_test_top] reset_phase() ended.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(63) @ 0.000 ns: uvm_test_top [uvm_test_top] main_phase() started.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_sanity_test.sv(18) @ 0.000 ns: uvm_test_top [uvm_test_top] Start of test
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(25) @ 0.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] pre_body() started.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(29) @ 0.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] pre_body() ended.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(25) @ 0.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] pre_body() started.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(29) @ 0.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] pre_body() ended.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 0 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ b_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_dout (3x3)   : '{'{31, 38, 45}, '{70, 86, 102}, '{109, 134, 159}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 0 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ b_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_dout (2x2)   : '{'{8, 12}, '{18, 26}} 
+ in_valid : 0x0
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 1.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 1 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ b_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_dout (3x3)   : '{'{445, 479, 513}, '{565, 608, 651}, '{685, 737, 789}} 
+ in_valid : 0x1
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 1.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 1 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ b_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_dout (2x2)   : '{'{72, 84}, '{98, 114}} 
+ in_valid : 0x1
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 2.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 2.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 2.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 2.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 2.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 2 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ b_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_dout (3x3)   : '{'{1345, 1406, 1467}, '{1546, 1616, 1686}, '{1747, 1826, 1905}} 
+ in_valid : 0x1
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 2.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 2 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ b_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_dout (2x2)   : '{'{200, 220}, '{242, 266}} 
+ in_valid : 0x1
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 3.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 3.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 3.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 3.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 3.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 3 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ b_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_dout (3x3)   : '{'{2731, 2819, 2907}, '{3013, 3110, 3207}, '{3295, 3401, 3507}} 
+ in_valid : 0x0
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 3.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 3 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ b_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_dout (2x2)   : '{'{392, 420}, '{450, 482}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 3.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 3.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 3.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 3.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 3.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 4 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ b_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_dout (3x3)   : '{'{4603, 4718, 4833}, '{4966, 5090, 5214}, '{5329, 5462, 5595}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 3.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 4 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ b_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_dout (2x2)   : '{'{648, 684}, '{722, 762}} 
+ in_valid : 0x0
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 4.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 4.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 4.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 5 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ b_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_dout (3x3)   : '{'{6961, 7103, 7245}, '{7405, 7556, 7707}, '{7849, 8009, 8169}} 
+ in_valid : 0x1
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ b_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_dout (2x2)   : '{'{8, 12}, '{18, 26}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 5 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ b_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_dout (2x2)   : '{'{968, 1012}, '{1058, 1106}} 
+ in_valid : 0x1
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 4.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 4.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{0, 0, 0, 0, 8, 18, 72} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{0, 0, 0, 0, 0, 12, 26} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 4.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 6 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ b_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_dout (3x3)   : '{'{9805, 9974, 10143}, '{10330, 10508, 10686}, '{10855, 11042, 11229}} 
+ in_valid : 0x1
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ b_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_din  (2x2)   : '{'{1, 2}, '{3, 4}} 
+ c_dout (2x2)   : '{'{8, 12}, '{18, 26}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 4.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 6 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ b_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_dout (2x2)   : '{'{1352, 1404}, '{1458, 1514}} 
+ in_valid : 0x0
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 5.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 5.000 ns: uvm_test_top.m_env_1.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 5.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 5.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 5.000 ns: uvm_test_top.m_env_1.m_sa_agt.sqr@@m_sa_seq_1 [m_sa_seq_1] Item 7 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ b_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_dout (3x3)   : '{'{13135, 13331, 13527}, '{13741, 13946, 14151}, '{14347, 14561, 14775}} 
+ in_valid : 0x1
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 5.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ b_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_dout (2x2)   : '{'{72, 84}, '{98, 114}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 5.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 7 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ b_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_dout (2x2)   : '{'{1800, 1860}, '{1922, 1986}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{72, 98, 200} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{84, 114} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(123) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: item done!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_driver.sv(116) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_agt.drv [drv] driver: getting item!
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 6.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ b_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_dout (3x3)   : '{'{31, 38, 45}, '{70, 86, 102}, '{109, 134, 159}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ b_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_din  (2x2)   : '{'{5, 6}, '{7, 8}} 
+ c_dout (2x2)   : '{'{72, 84}, '{98, 114}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/sequences/sa_seq.sv(45) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_agt.sqr@@m_sa_seq_0 [m_sa_seq_0] Item 8 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ b_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_dout (2x2)   : '{'{2312, 2380}, '{2450, 2522}} 
+ in_valid : 0x1
+ out_valid : 0x1
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 6.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ b_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_dout (2x2)   : '{'{200, 220}, '{242, 266}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 7.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{200, 242, 392} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 7.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{220, 266} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 7.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ b_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_din  (2x2)   : '{'{9, 10}, '{11, 12}} 
+ c_dout (2x2)   : '{'{200, 220}, '{242, 266}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 8.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ b_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_dout (3x3)   : '{'{445, 479, 513}, '{565, 608, 651}, '{685, 737, 789}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 8.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ b_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_dout (2x2)   : '{'{392, 420}, '{450, 482}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 8.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 70, 109, 445} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 8.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38, 86, 134} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 8.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 102} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 8.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{392, 450, 648} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 8.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{420, 482} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 8.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ b_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_dout (3x3)   : '{'{31, 38, 45}, '{70, 86, 102}, '{109, 134, 159}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ b_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_din  (3x3)   : '{'{1, 2, 3}, '{4, 5, 6}, '{7, 8, 9}} 
+ c_dout (3x3)   : '{'{0, 0, 0}, '{31, 38, 45}, '{70, 86, 102}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 8.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ b_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_din  (2x2)   : '{'{13, 14}, '{15, 16}} 
+ c_dout (2x2)   : '{'{392, 420}, '{450, 482}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 9.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ b_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_dout (2x2)   : '{'{648, 684}, '{722, 762}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 9.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{648, 722, 968} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 9.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{684, 762} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 9.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ b_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_dout (3x3)   : '{'{1345, 1406, 1467}, '{1546, 1616, 1686}, '{1747, 1826, 1905}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 9.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ b_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_din  (2x2)   : '{'{17, 18}, '{19, 20}} 
+ c_dout (2x2)   : '{'{648, 684}, '{722, 762}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 10.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{109, 445, 565, 685, 1345} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 10.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{134, 479, 608, 737} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 10.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{159, 513, 651} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 10.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ b_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_dout (3x3)   : '{'{445, 479, 513}, '{565, 608, 651}, '{685, 737, 789}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ b_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_din  (3x3)   : '{'{10, 11, 12}, '{13, 14, 15}, '{16, 17, 18}} 
+ c_dout (3x3)   : '{'{109, 134, 159}, '{445, 479, 513}, '{565, 608, 651}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 10.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ b_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_dout (2x2)   : '{'{968, 1012}, '{1058, 1106}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 11.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{968, 1058, 1352} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 11.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1012, 1106} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 11.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ b_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_din  (2x2)   : '{'{21, 22}, '{23, 24}} 
+ c_dout (2x2)   : '{'{968, 1012}, '{1058, 1106}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 11.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ b_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_dout (3x3)   : '{'{2731, 2819, 2907}, '{3013, 3110, 3207}, '{3295, 3401, 3507}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 11.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ b_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_dout (2x2)   : '{'{1352, 1404}, '{1458, 1514}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 12.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{685, 1345, 1546, 1747, 2731} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 12.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{737, 1406, 1616, 1826} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 12.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{789, 1467, 1686} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 12.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{1352, 1458, 1800} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 12.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1404, 1514} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 12.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ b_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_dout (3x3)   : '{'{1345, 1406, 1467}, '{1546, 1616, 1686}, '{1747, 1826, 1905}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ b_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_din  (3x3)   : '{'{19, 20, 21}, '{22, 23, 24}, '{25, 26, 27}} 
+ c_dout (3x3)   : '{'{685, 737, 789}, '{1345, 1406, 1467}, '{1546, 1616, 1686}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 12.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ b_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_din  (2x2)   : '{'{25, 26}, '{27, 28}} 
+ c_dout (2x2)   : '{'{1352, 1404}, '{1458, 1514}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 13.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ b_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_dout (2x2)   : '{'{1800, 1860}, '{1922, 1986}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 13.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{1800, 1922, 2312} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 13.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1860, 1986} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 13.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ b_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_dout (3x3)   : '{'{4603, 4718, 4833}, '{4966, 5090, 5214}, '{5329, 5462, 5595}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 13.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ b_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_din  (2x2)   : '{'{29, 30}, '{31, 32}} 
+ c_dout (2x2)   : '{'{1800, 1860}, '{1922, 1986}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 14.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{1747, 2731, 3013, 3295, 4603} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 14.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{1826, 2819, 3110, 3401} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 14.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{1905, 2907, 3207} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 14.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ b_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_dout (3x3)   : '{'{2731, 2819, 2907}, '{3013, 3110, 3207}, '{3295, 3401, 3507}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ b_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_din  (3x3)   : '{'{28, 29, 30}, '{31, 32, 33}, '{34, 35, 36}} 
+ c_dout (3x3)   : '{'{1747, 1826, 1905}, '{2731, 2819, 2907}, '{3013, 3110, 3207}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 14.000 ns: uvm_test_top.m_env_0.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ b_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_dout (2x2)   : '{'{2312, 2380}, '{2450, 2522}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 14.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [0] '{2312, 2450, 0} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 14.000 ns: uvm_test_top.m_env_0.m_sa_agt.mon [mon] Matrix C-OUT [1] '{2380, 2522} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(41) @ 14.000 ns: uvm_test_top.m_env_0.m_sa_sb [m_sa_sb] SB Match! 
+ 
+----------- SA_SEQ ITEM ----------------
+ a_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ b_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_din  (2x2)   : '{'{33, 34}, '{35, 36}} 
+ c_dout (2x2)   : '{'{2312, 2380}, '{2450, 2522}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 15.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ b_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_dout (3x3)   : '{'{6961, 7103, 7245}, '{7405, 7556, 7707}, '{7849, 8009, 8169}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 16.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{3295, 4603, 4966, 5329, 6961} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 16.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{3401, 4718, 5090, 5462} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 16.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{3507, 4833, 5214} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 16.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ b_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_dout (3x3)   : '{'{4603, 4718, 4833}, '{4966, 5090, 5214}, '{5329, 5462, 5595}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ b_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_din  (3x3)   : '{'{37, 38, 39}, '{40, 41, 42}, '{43, 44, 45}} 
+ c_dout (3x3)   : '{'{3295, 3401, 3507}, '{4603, 4718, 4833}, '{4966, 5090, 5214}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 17.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ b_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_dout (3x3)   : '{'{9805, 9974, 10143}, '{10330, 10508, 10686}, '{10855, 11042, 11229}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 18.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{5329, 6961, 7405, 7849, 9805} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 18.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{5462, 7103, 7556, 8009} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 18.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{5595, 7245, 7707} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 18.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ b_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_dout (3x3)   : '{'{6961, 7103, 7245}, '{7405, 7556, 7707}, '{7849, 8009, 8169}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ b_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_din  (3x3)   : '{'{46, 47, 48}, '{49, 50, 51}, '{52, 53, 54}} 
+ c_dout (3x3)   : '{'{5329, 5462, 5595}, '{6961, 7103, 7245}, '{7405, 7556, 7707}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/refmodels/sa_refmodel/sa_refmodel.sv(33) @ 19.000 ns: uvm_test_top.m_env_1.m_sa_refmodel [m_sa_refmodel] Got item 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ b_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_dout (3x3)   : '{'{13135, 13331, 13527}, '{13741, 13946, 14151}, '{14347, 14561, 14775}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 19.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{7849, 9805, 10330, 10855, 13135} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 19.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{8009, 9974, 10508, 11042} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 19.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{8169, 10143, 10686} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 19.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ b_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_dout (3x3)   : '{'{9805, 9974, 10143}, '{10330, 10508, 10686}, '{10855, 11042, 11229}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ b_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_din  (3x3)   : '{'{55, 56, 57}, '{58, 59, 60}, '{61, 62, 63}} 
+ c_dout (3x3)   : '{'{7849, 8009, 8169}, '{9805, 9974, 10143}, '{10330, 10508, 10686}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 21.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [0] '{10855, 13135, 13741, 14347, 0} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 21.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [1] '{11042, 13331, 13946, 14561} 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(154) @ 21.000 ns: uvm_test_top.m_env_1.m_sa_agt.mon [mon] Matrix C-OUT [2] '{11229, 13527, 14151} 
+UVM_ERROR /home/projects_2/workspace/raymond/europa/europa/uvm/scoreboards/sa_sb/sa_sb.sv(43) @ 21.000 ns: uvm_test_top.m_env_1.m_sa_sb [m_sa_sb] SB Mismatch! 
+ Exp: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ b_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_dout (3x3)   : '{'{13135, 13331, 13527}, '{13741, 13946, 14151}, '{14347, 14561, 14775}} 
+ in_valid : 0x0
+ out_valid : 0x0
+--------------------------------------------- 
+ Act: 
+----------- SA_SEQ ITEM ----------------
+ a_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ b_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_din  (3x3)   : '{'{64, 65, 66}, '{67, 68, 69}, '{70, 71, 72}} 
+ c_dout (3x3)   : '{'{10855, 11042, 11229}, '{13135, 13331, 13527}, '{13741, 13946, 14151}} 
+ in_valid : 0x0
+ out_valid : 0x0
+---------------------------------------------
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_sanity_test.sv(42) @ 106.000 ns: uvm_test_top [uvm_test_top] End of test
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(65) @ 106.000 ns: uvm_test_top [uvm_test_top] main_phase() ended.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(72) @ 106.000 ns: uvm_test_top [uvm_test_top] final_phase() started.
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(75) @ 106.000 ns: uvm_test_top [uvm_test_top] 
+ SIMULATION RESULT: F-A-I-L-E-D
+
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/subsys/tests/sa_subsys_base_test.sv(79) @ 106.000 ns: uvm_test_top [uvm_test_top] final_phase() ended.
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_report_catcher.svh(705) @ 106.000 ns: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_report_server.svh(904) @ 106.000 ns: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  155
+UVM_WARNING :    1
+UVM_ERROR :    8
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[TPRGED]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[UVMTOP]     1
+[build_phase]     2
+[connect_phase]     2
+[drv]    38
+[m_env_0]     2
+[m_env_1]     2
+[m_sa_cfg]     2
+[m_sa_refmodel]    17
+[m_sa_sb]    17
+[m_sa_seq_0]    11
+[m_sa_seq_1]    10
+[mon]    44
+[uvm_test_top]    12
+
+$finish called from file "/opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh", line 527.
+$finish at simulation time 105.634 ns
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 105634 ps
+
+Simulation Performance Summary
+==============================
+Simulation started at :  Wed May  1 14:07:36 2024
+Elapsed Time          :  1 sec
+CPU Time              :  0.5 sec
+Virtual memory size   :  389.5 MB
+Resident set size     :  123.1 MB
+Shared memory size    :  2.9 MB
+Private memory size   :  120.2 MB
+Major page faults     :  6
+Machine name          :  htz1-cnode17
+==============================
+
+Wed May  1 14:07:36 2024
