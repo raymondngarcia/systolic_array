@@ -7,9 +7,16 @@ class sa_env_cfg extends uvm_object;
   `uvm_object_utils(sa_env_cfg)
 
   rand sa_cfg       m_sa_cfg;
-
   rand bit          m_sb_en;
   rand bit          m_sa_agt_active;
+
+  constraint sa_sb_c {
+    soft m_sb_en == 1;
+  }
+
+  constraint sa_agt_c {
+    soft m_sa_agt_active == 1;
+  }
 
   function new(string name = "sa_env_cfg");
     super.new(name);

@@ -1,0 +1,16 @@
+package:
+  name: sa_subsys_uvm_test
+  description: "Tests for SA UVM Testbench"
+  authors:
+    - "raymondngarcia"
+
+dependencies:
+  sa_uvm_seq:            { path: "../../uvm/sequences" }
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      - ../../rtl/sa_subsys_pkg.sv
+      - sa_subsys_test_pkg.sv

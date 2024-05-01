@@ -255,7 +255,7 @@ _run_vcs_:
 		-l sim.log || sim_sts=$$?
 	# Check the log for errors
 	chk_sts=0
-	grep -e '^Error:' -e '^Fatal:' -e 'UVM_FATAL :    1' -e 'SvtTestEpilog: Failed' sim.log &> /dev/null || chk_sts=$$?
+	grep -e '^Error:' -e '^Fatal:' -e 'UVM_FATAL :    1' -e 'SIMULATION RESULT: F-A-I-L-E-D' sim.log &> /dev/null || chk_sts=$$?
 	if [ $$sim_sts -eq 0 ] && [ $$chk_sts -ne 0 ]; then \
 		mv FAILED PASSED; \
 	fi

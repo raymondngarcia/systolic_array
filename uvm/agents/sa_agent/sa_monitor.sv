@@ -8,6 +8,7 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsign
   typedef bit signed [2*DIN_WIDTH-1:0] c_data_t;
   typedef bit signed [DIN_WIDTH-1:0]   ab_data_t;
 
+  sa_cfg                       cfg;
   c_data_t                     cin_q[N][$];
   ab_data_t                    a_q[N][$];
   ab_data_t                    b_q[N][$];
@@ -28,6 +29,11 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsign
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
+    if (cfg==null) begin
+      `uvm_fatal(get_name(), "monitor cfg is null!")
+    end else begin
+      `uvm_info(get_name(), $sformatf("monitor cfg: %s", cfg.convert2string()), UVM_NONE)
+    end
     to_refmodel_port  = new("to_refmodel_port", this);
     to_sb_act_port  = new("to_sb_act_port", this);
     sa_q_sem = new(1);
@@ -99,15 +105,15 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsign
     seq_item_t itm = seq_item_t::type_id::create("itm");
 
     for (int i=0; i<N; i++) begin
-      if (a_q[i].size() < M) `uvm_error(get_name(), $sformatf("a_q[%0d].size() < M! Got size of %0d. Should be >= %0d", i, a_q[i].size(), M))
+      if (a_q[i].size() < M && cfg.enable_protocol_check) `uvm_error(get_name(), $sformatf("a_q[%0d].size() < M! Got size of %0d. Should be >= %0d", i, a_q[i].size(), M))
     end
 
     for (int i=0; i<M; i++) begin
-      if (b_q[i].size() < N) `uvm_error(get_name(), $sformatf("b_q[%0d].size() < N! Got size of %0d. Should be >= %0d", i, b_q[i].size(), N))
+      if (b_q[i].size() < N && cfg.enable_protocol_check) `uvm_error(get_name(), $sformatf("b_q[%0d].size() < N! Got size of %0d. Should be >= %0d", i, b_q[i].size(), N))
     end
 
     for (int i=0; i<N; i++) begin
-      if (cin_q[i].size() < N) `uvm_error(get_name(), $sformatf("cin_q[%0d].size() < N! Got size of %0d. Should be >= %0d", i, cin_q[i].size(), N))
+      if (cin_q[i].size() < N && cfg.enable_protocol_check) `uvm_error(get_name(), $sformatf("cin_q[%0d].size() < N! Got size of %0d. Should be >= %0d", i, cin_q[i].size(), N))
     end
 
     // create A,B,C_IN
@@ -158,7 +164,9 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsign
 
         sa_q_sem.get();
         if (sa_q.size() ==0) begin
-          `uvm_error(get_name(), "sa_q.size() == 0! Unexpected COUT output!")
+          if (cfg.enable_protocol_check) begin
+            `uvm_error(get_name(), "sa_q.size() == 0! Unexpected COUT output!")
+          end
         end else begin
           for (int i=0; i < N; i++) begin
             for (int j=0; j < N; j++) begin
@@ -191,6 +199,8 @@ class sa_monitor#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsign
         end
       join_any
       disable fork;
+      void'(sa_q_sem.try_get());
+      sa_q_sem.put();
       `uvm_info(get_name(), "monitor: resetting monitor!", UVM_NONE)
     end
   endtask

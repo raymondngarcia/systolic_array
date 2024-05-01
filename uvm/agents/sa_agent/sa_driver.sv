@@ -103,7 +103,6 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
         cout_q[j].push_back(cout);
       end
     end
-
   endfunction
 
   function int get_matrix_delay();
@@ -170,21 +169,23 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
             end
           end
           delay_done = 1;
-          `uvm_info(get_name(), "driver: drive_a() done!", UVM_NONE)
+          `uvm_info(get_name(), "driver: drive_a() done!", UVM_FULL)
 
           // process in_valid
-          if ((delay_count-M) >= 2*N-2 ) begin
-            if (!in_valid_done) begin
-              vif.drv.in_valid <= 1;
-              b2b_in_count = 1;
-            end else begin
-              if (b2b_in_count >= cfg.m_M) begin
+          if (cfg.in_valid_seq_ctrl==1) begin
+            if ((delay_count-M) >= 2*N-2 ) begin
+              if (!in_valid_done) begin
                 vif.drv.in_valid <= 1;
-                b2b_in_count = 0;
+                b2b_in_count = 1;
+              end else begin
+                if (b2b_in_count >= M) begin
+                  vif.drv.in_valid <= 1;
+                  b2b_in_count = 0;
+                end
+                b2b_in_count += 1;
               end
-              b2b_in_count += 1;
+              in_valid_done =  1;
             end
-            in_valid_done =  1;
           end
 
         end
@@ -207,7 +208,7 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
             vif.drv.b_din[i] <= b_var;
           end
         end
-        `uvm_info(get_name(), "driver: drive_b() done!", UVM_NONE)
+        `uvm_info(get_name(), "driver: drive_b() done!", UVM_FULL)
       end
     end
   endtask
@@ -232,7 +233,7 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
             end
           end
           delay_done = 1;
-          `uvm_info(get_name(), "driver: drive_a() done!", UVM_NONE)
+          `uvm_info(get_name(), "driver: drive_cin() done!", UVM_FULL)
 
         end
         delay_count += 1;
@@ -249,7 +250,7 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
 
     forever begin
       @(vif.drv);
-      vif.drv.out_valid <= 0;
+      if (cfg.out_valid_seq_ctrl) vif.drv.out_valid <= 0;
 
       if (is_size_not_zero(C_DOUT)) begin
         if (delay_count >= get_matrix_delay()-1 || delay_done) begin
@@ -262,14 +263,17 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
               vif.drv.c_dout[i] <= 0;
             end
           end
-          if (b2b_out_count >= cfg.m_M) begin
-            b2b_out_count = 0;
-            vif.drv.out_valid <= 1;
-          end
 
-          b2b_out_count += 1;
+          // Out Valid Ctrl
+          if (cfg.out_valid_seq_ctrl) begin
+            if (b2b_out_count >= M) begin
+              b2b_out_count = 0;
+              vif.drv.out_valid <= 1;
+            end
+            b2b_out_count += 1;
+          end
           delay_done = 1;
-          `uvm_info(get_name(), "driver: drive_cout() done!", UVM_NONE)
+          `uvm_info(get_name(), "driver: drive_cout() done!", UVM_MEDIUM)
         end
         delay_count += 1;
       end else begin
@@ -307,6 +311,8 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
         b_q[i].delete();
         cout_q[i].delete();
       end
+      void'(sem.try_get());
+      sem.put();
       lane_a_delay_done = 0;
       lane_b_delay_done = 0;
       lane_cin_delay_done = 0;

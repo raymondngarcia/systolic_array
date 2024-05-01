@@ -31,6 +31,7 @@ class sa_agent#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned
       sqr = uvm_sequencer#(sa_seq_item#(DIN_WIDTH, N, M))::type_id::create("sqr",this);
     end
     mon = sa_monitor#(DIN_WIDTH, N, M)::type_id::create("mon",this);
+    mon.cfg = cfg_h;
   endfunction
 
   virtual function void connect_phase(uvm_phase phase);

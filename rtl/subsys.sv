@@ -1,12 +1,12 @@
 
-`ifndef __sub_sys_SV__
-`define __sub_sys_SV__
+`ifndef __SUBSYS_SV__
+`define __SUBSYS_SV__
 
 
-module sub_sys #(
+module subsys #(
   parameter int unsigned DIN_WIDTH = 'd8,
   parameter int unsigned N = 'd4,
-  localparam int unsigned BUS_WIDTH = 2*DIN_WIDTH*N
+  parameter int unsigned BUS_WIDTH = 2*DIN_WIDTH*N
 ) (
   input  logic                rst_n,
   input  logic                sys_clk,
@@ -17,10 +17,10 @@ module sub_sys #(
   input  logic                rd_fifo,
   output logic                in_fifo_full,
   output logic[BUS_WIDTH-1:0] dout,
-  output logic                out_fifo_empty;
+  output logic                out_fifo_empty
 );
 
 endmodule
 
 
-`endif // __sub_sys_SV__
+`endif // __SUBSYS_SV__

@@ -4,8 +4,6 @@ package sa_agent_pkg;
   import uvm_pkg::*;
   `include "uvm_macros.svh"
 
-  import sa_pkg::*;
-
   `include "sa_cfg.sv"
   `include "sa_seq_item.sv"
   `include "sa_monitor.sv"

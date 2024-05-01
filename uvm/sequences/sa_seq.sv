@@ -1,12 +1,15 @@
 `ifndef __SA_SEQ_SV__
 `define __SA_SEQ_SV__
 
-class sa_seq extends uvm_sequence;
-  `uvm_object_utils(sa_seq)
+class sa_seq#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned M = 'd4) extends uvm_sequence;
+  `uvm_object_param_utils(sa_seq#(DIN_WIDTH, N, M))
 
-  typedef sa_seq_item#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M) sa_item_t;
-  sa_env                    m_env_h;
+  typedef sa_seq_item#(DIN_WIDTH, N, M) sa_item_t;
+  typedef sa_env#(DIN_WIDTH, N, M) sa_env_t;
+
+  sa_env_t                  m_env_h;
   rand int unsigned         m_iteration;
+  rand int unsigned         m_env_num = 0;
 
   constraint default_c {
     soft m_iteration >= 5;
@@ -18,9 +21,10 @@ class sa_seq extends uvm_sequence;
   endfunction
 
   virtual task pre_body();
+    // always good for seq to have a handle to the env for future use
     `uvm_info(get_name(), "pre_body() started.",UVM_LOW)
-    if (!uvm_config_db #(sa_env)::get(null, "", "SA_ENV", m_env_h)) begin
-      `uvm_fatal(get_name(), "Unable to get ENV SA")
+    if (!uvm_config_db #(sa_env_t)::get(null, "", $sformatf("SA_ENV_%0d", m_env_num), m_env_h)) begin
+      `uvm_fatal(get_name(), $sformatf("Unable to get SA_ENV_%0d", m_env_num))
     end
     `uvm_info(get_name(), "pre_body() ended.",UVM_LOW)
   endtask : pre_body

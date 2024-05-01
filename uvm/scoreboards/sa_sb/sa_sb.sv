@@ -38,9 +38,9 @@ class sa_sb#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned M 
           exp_fifo.get(exp_item);
           exp_cnt+= 1;
           if (act_item.compare(exp_item)) begin
-            `uvm_info(get_name(), $sformatf("SB Match! %s", act_item.convert2string()), UVM_NONE)
+            `uvm_info(get_name(), $sformatf("SB Match! \n %s", act_item.convert2string()), UVM_NONE)
           end else begin
-            `uvm_error(get_name(), $sformatf("SB Mismatch! Exp: %s Act: %s", exp_item.convert2string(), act_item.convert2string()))
+            `uvm_error(get_name(), $sformatf("SB Mismatch! \n Exp: %s \n Act: %s", exp_item.convert2string(), act_item.convert2string()))
           end
 
         end

@@ -1,16 +1,16 @@
 `ifndef __SA_ENV_SV__
 `define __SA_ENV_SV__
 
-class sa_env extends uvm_env;
+class sa_env#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigned M = 'd4) extends uvm_env;
 
-  `uvm_component_utils(sa_env)
+  `uvm_component_param_utils(sa_env#(DIN_WIDTH, N, M))
 
   sa_env_cfg                                             m_env_cfg_h;
-  sa_agent#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M)     m_sa_agt;
-  sa_refmodel#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M)  m_sa_refmodel;
-  sa_sb#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M)        m_sa_sb;
+  sa_agent#(DIN_WIDTH, N, M)     m_sa_agt;
+  sa_refmodel#(DIN_WIDTH, N, M)  m_sa_refmodel;
+  sa_sb#(DIN_WIDTH, N, M)        m_sa_sb;
 
-  function new(string name = "cva6v_env", uvm_component parent = null);
+  function new(string name = "sa_env", uvm_component parent = null);
     super.new(name, parent);
   endfunction : new
 
@@ -23,11 +23,11 @@ class sa_env extends uvm_env;
       `uvm_fatal(get_name(), "Unable to find environment configuration object in the uvm_config_db");
     end
 
-    m_sa_agt = sa_agent#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M)::type_id::create("m_sa_agt", this);
+    m_sa_agt = sa_agent#(DIN_WIDTH, N, M)::type_id::create("m_sa_agt", this);
     m_sa_agt.cfg_h = m_env_cfg_h.m_sa_cfg;
 
-    m_sa_refmodel = sa_refmodel#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M)::type_id::create("m_sa_refmodel", this);
-    m_sa_sb = sa_sb#(sa_pkg::DIN_WIDTH, sa_pkg::N, sa_pkg::M)::type_id::create("m_sa_sb", this);
+    m_sa_refmodel = sa_refmodel#(DIN_WIDTH, N, M)::type_id::create("m_sa_refmodel", this);
+    m_sa_sb = sa_sb#(DIN_WIDTH, N, M)::type_id::create("m_sa_sb", this);
 
     `uvm_info(get_name(), "Exiting build_phase...", UVM_LOW)
   endfunction : build_phase

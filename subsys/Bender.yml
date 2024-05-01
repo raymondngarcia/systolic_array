@@ -1,0 +1,18 @@
+package:
+  name: sa_subsys_uvm_tb
+  description: "SA SUBSYS UVM TB"
+  authors:
+    - "raymondngarcia"
+
+dependencies:
+  uvm:                   { path: "../uvm_pkg"}
+  sa_subsys_uvm_test:    { path: "./tests"  } # Tests, SA Verification Env
+
+sources:
+  - target: simulation
+    include_dirs:
+      - .
+    files:
+      #- ../rtl/sa_subsys_pkg.sv
+      - ../rtl/subsys.sv
+      - ../rtl/subsys_top.sv

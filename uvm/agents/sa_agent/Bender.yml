@@ -6,7 +6,7 @@ package:
 
 dependencies:
   uvm        :    { path: "../../../uvm_pkg"}
-  sa_rtl     :    { path: "../../../rtl"  }
+  sa_rtl     :    { path: "../../../rtl"  } # needs the interface
 
 sources:
   - target: simulation

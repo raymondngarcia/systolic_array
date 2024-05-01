@@ -5,7 +5,6 @@ package sa_env_pkg;
   import uvm_pkg::*;
   `include "uvm_macros.svh"
 
-  import sa_pkg::*;
   import sa_agent_pkg::*;
   import sa_ref_model_pkg::*;
   import sa_sb_pkg::*;
