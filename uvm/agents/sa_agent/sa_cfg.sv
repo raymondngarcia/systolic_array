@@ -12,6 +12,7 @@ class sa_cfg extends uvm_object;
   rand bit is_active;
   rand bit in_valid_seq_ctrl;
   rand bit out_valid_seq_ctrl;
+  rand bit drive_cin; // set to 0 to have the option to loopack cout in top level
 
   //Monitor
   //for simplicity, we have just field to enable/disable protocol check
@@ -27,12 +28,17 @@ class sa_cfg extends uvm_object;
     soft out_valid_seq_ctrl == 1;
   }
 
+  constraint drv_default_cin_c {
+    soft drive_cin == 1;
+  }
+
+
   constraint mon_default_c {
     soft enable_protocol_check == 1;
   }
 
   constraint cov_default_c {
-    soft has_coverage == 1;
+    soft has_coverage == 0; // function coverage is not yet implemented
   }
 
   function new(string name = "sa_cfg");
@@ -46,7 +52,9 @@ class sa_cfg extends uvm_object;
     s = {s, $sformatf("\n is_active              : %0d",    is_active)};
     s = {s, $sformatf("\n in_valid_seq_ctrl      : %0d",    in_valid_seq_ctrl)};
     s = {s, $sformatf("\n out_valid_seq_ctrl     : %0d",    out_valid_seq_ctrl)};
+    s = {s, $sformatf("\n drive_cin              : %0d",    drive_cin)};
     s = {s, $sformatf("\n enable_protocol_check  : %0d",    enable_protocol_check)};
+    s = {s, $sformatf("\n has_coverage           : %0d",    has_coverage)};
     s = {s, $sformatf("\n---------------------------------------------") };
     return s;
   endfunction

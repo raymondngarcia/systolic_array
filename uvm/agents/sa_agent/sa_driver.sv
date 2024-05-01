@@ -241,6 +241,8 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
     end
   endtask
 
+  // NOTE: Driving the output should not be part of the driver
+  // but since we have no DUT, we also do it here.
   // drive cout
   virtual task drive_cout();
     int delay_count = 0;
@@ -298,8 +300,8 @@ class sa_driver#(int unsigned DIN_WIDTH = 'd8, int unsigned N = 'd4, int unsigne
             get_item();
             drive_a();
             drive_b();
-            drive_cin();
-            drive_cout();
+            if (cfg.drive_cin) drive_cin();
+            drive_cout(); // TODO: remove or put option to disable when DUT is available
           join
         end
       join_any

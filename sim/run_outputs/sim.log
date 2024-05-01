@@ -1,7 +1,7 @@
 Command: /home/projects_2/workspace/raymond/europa/europa/sim/build_vcs_systolic_array/compile_vcs/systolic_array_elab -reportstats -licqueue -assert global_finish_maxfail=1 -assert errmsg +UVM_VERBOSITY=UVM_LOW -ucli -do ../../dump_vpd.tcl +UVM_TESTNAME=sa_sanity_test +ntb_random_seed=1 -l sim.log
 Chronologic VCS simulator copyright 1991-2023
 Contains Synopsys proprietary information.
-Compiler version U-2023.03-SP2-1_Full64; Runtime version U-2023.03-SP2-1_Full64;  May  1 10:57 2024
+Compiler version U-2023.03-SP2-1_Full64; Runtime version U-2023.03-SP2-1_Full64;  May  1 13:46 2024
 UVM_INFO /opt/synopsys/vcs/U-2023.03-SP2-1/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
 ----------------------------------------------------------------
 UVM-1.2.Synopsys
@@ -51,13 +51,15 @@ ucli% call {$vcdpluson(0, hdl_top)}
 ucli% run
 UVM_INFO @ 0.000 ns: reporter [RNTST] Running test sa_sanity_test...
 UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/tests/sa_base_test.sv(20) @ 0.000 ns: uvm_test_top [uvm_test_top] build_phase() started.
-UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_cfg.sv(55) @ 0.000 ns: reporter [m_sa_cfg] 
+UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_cfg.sv(63) @ 0.000 ns: reporter [m_sa_cfg] 
 ----------- SA Config ----------------
  Instance               : m_sa_cfg
  is_active              : 1
  in_valid_seq_ctrl      : 1
  out_valid_seq_ctrl     : 1
+ drive_cin              : 1
  enable_protocol_check  : 1
+ has_coverage           : 0
 ---------------------------------------------
 UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(18) @ 0.000 ns: uvm_test_top.m_env [build_phase] Entered...
 UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(32) @ 0.000 ns: uvm_test_top.m_env [m_env] Exiting build_phase...
@@ -67,7 +69,9 @@ UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa
  is_active              : 1
  in_valid_seq_ctrl      : 1
  out_valid_seq_ctrl     : 1
+ drive_cin              : 1
  enable_protocol_check  : 1
+ has_coverage           : 0
 ---------------------------------------------
 UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa_monitor.sv(35) @ 0.000 ns: uvm_test_top.m_env.m_sa_agt.mon [mon] monitor cfg: 
 ----------- SA Config ----------------
@@ -75,7 +79,9 @@ UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/agents/sa_agent/sa
  is_active              : 1
  in_valid_seq_ctrl      : 1
  out_valid_seq_ctrl     : 1
+ drive_cin              : 1
  enable_protocol_check  : 1
+ has_coverage           : 0
 ---------------------------------------------
 UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(36) @ 0.000 ns: uvm_test_top.m_env [connect_phase] Entered...
 UVM_INFO /home/projects_2/workspace/raymond/europa/europa/uvm/env/sa_env.sv(43) @ 0.000 ns: uvm_test_top.m_env [m_env] Exiting connect_phase...
@@ -477,15 +483,15 @@ Time: 106260 ps
 
 Simulation Performance Summary
 ==============================
-Simulation started at :  Wed May  1 10:57:42 2024
-Elapsed Time          :  1 sec
-CPU Time              :  0.3 sec
+Simulation started at :  Wed May  1 13:46:09 2024
+Elapsed Time          :  2 sec
+CPU Time              :  0.5 sec
 Virtual memory size   :  388.2 MB
 Resident set size     :  122.8 MB
 Shared memory size    :  2.9 MB
 Private memory size   :  119.9 MB
-Major page faults     :  6
-Machine name          :  htz1-cnode21
+Major page faults     :  7
+Machine name          :  htz1-cnode17
 ==============================
 
-Wed May  1 10:57:42 2024
+Wed May  1 13:46:10 2024

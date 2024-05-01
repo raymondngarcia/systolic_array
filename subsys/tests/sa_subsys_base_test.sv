@@ -81,7 +81,14 @@ class sa_subsys_base_test extends uvm_test;
 
   virtual function void randomize_env_cfg();
     for (int i=0; i < NUM_SA; i++) begin
-      if (!(m_env_cfg[i].randomize())) begin
+      if (!(m_env_cfg[i].randomize() with {
+        // m_sa_cfg.drive_cin == 0; // allow to loopback cout from toplevel
+        // NOTE: the driver does not support looped-back COUT generation
+        // Driver does not compute COUT. Only the sequence item does that which is not
+        // aware of on-the-fly CIN. This will in turn make the computation of COUT wrong.
+        // Enable loopback only when DUT is present
+        m_sa_cfg.drive_cin == 1; // NOTE: the driver does not support looped-back COUT generation
+      })) begin
         `uvm_fatal(get_name(), "Randomization failed for m_env_cfg!")
       end
     end

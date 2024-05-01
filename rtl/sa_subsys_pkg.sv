@@ -3,6 +3,7 @@
 
 package sa_subsys_pkg;
 
+
   // First SA instance
   parameter int unsigned N_0 = 2;
   parameter int unsigned M_0 = 2;
@@ -16,6 +17,5 @@ package sa_subsys_pkg;
   parameter int unsigned BUS_WIDTH_1 = 2*DIN_WIDTH_1*N_1;
 
   parameter int unsigned NUM_SA = 2;
-
 endpackage
 `endif

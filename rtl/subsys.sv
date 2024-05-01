@@ -15,9 +15,13 @@ module subsys #(
   input  logic[BUS_WIDTH-1:0] din,
   input  logic                wr_fifo,
   input  logic                rd_fifo,
-  output logic                in_fifo_full,
-  output logic[BUS_WIDTH-1:0] dout,
-  output logic                out_fifo_empty
+
+  // These signals belowshould be output
+  // but this is a dummy module.
+  // DUT is not implemented
+  input logic                in_fifo_full,
+  input logic[BUS_WIDTH-1:0] dout,
+  input logic                out_fifo_empty
 );
 
 endmodule

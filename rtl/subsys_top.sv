@@ -1,3 +1,10 @@
+// By using defines, we can change the values of sr_clk and sys_clk.
+// The defines could be controlled by using different files to include.
+// However, it is always better to have a simple clock generator.
+// Clock
+`define  SR_CLK_PERIOD       0.625ns  // 1.6GHz
+`define  SR_SYS_CLK_FACTOR   2.0      // for sys_clk in relation to SR_CLK
+
 module hdl_top;
   // Time unit and precision
   timeunit 1ps; timeprecision 1ps;
@@ -10,8 +17,9 @@ module hdl_top;
   typedef virtual sa_if  #(sa_subsys_pkg::DIN_WIDTH_0, sa_subsys_pkg::N_0, sa_subsys_pkg::M_0) sa_vif_0_t;
   typedef virtual sa_if  #(sa_subsys_pkg::DIN_WIDTH_1, sa_subsys_pkg::N_1, sa_subsys_pkg::M_1) sa_vif_1_t;
 
-  realtime             SR_CLK_PERIOD = 0.625ns;  // 1.6GHz
-  real                 SR_SYS_CLK_FACTOR = 2.0; // for sys_clk in relation to SR_CLK
+  // Clock
+  parameter realtime SR_CLK_PERIOD      = `SR_CLK_PERIOD;
+  parameter real     SR_SYS_CLK_FACTOR  = `SR_SYS_CLK_FACTOR;
 
   logic                                 rst_n;
   logic                                 sys_clk;
@@ -39,6 +47,20 @@ module hdl_top;
     .N                    (sa_subsys_pkg::N_0),
     .BUS_WIDTH            (sa_subsys_pkg::BUS_WIDTH_0)
   ) dut (.*);
+
+  // Interface drives all the signals including DUT output since out DUT is an empty module
+  assign M_minus_one                                                    = (sa_subsys_pkg::M_0 -1'b1);
+  assign din[(sa_subsys_pkg::BUS_WIDTH_0/2)-1:0]                        = i_sa_if_0.a_din;
+  assign din[sa_subsys_pkg::BUS_WIDTH_0-1:sa_subsys_pkg::BUS_WIDTH_0/2] = i_sa_if_0.b_din;
+  assign wr_fifo                                                        = i_sa_if_0.in_valid;  // write to Input FIFO when data is valid
+  assign rd_fifo                                                        = i_sa_if_0.out_valid; // read from Output FIFO when data is valid
+
+  // We can loopback CIN to COUT but keep in mind with NO actual DUT, the driver cannot
+  // drive COUT correctly. This will be fiuture enhancements
+  // assign i_sa_if_0.c_din = i_sa_if_0.c_dout;
+
+  // should be assigning i_sa_if_0.c_dout = dout but we do not have DUT
+  assign dout                                                           = i_sa_if_0.c_dout;
 
   initial begin
     uvm_config_db#(sa_vif_0_t)::set(.cntxt(null), .inst_name("uvm_test_top.m_env_0.m_sa_agt"),  .field_name("vif"),  .value(i_sa_if_0));
